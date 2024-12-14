@@ -1,5 +1,5 @@
 import pytest
-from day6 import get_avatar_line, get_avatar_char_num, get_avatar_direction, get_avatar_row_num, get_line_by_num, look_ahead_is_empty
+from day6 import *
 
 
 
@@ -57,3 +57,32 @@ def test_look_ahead_is_empty():
     assert look_ahead_is_empty(grid_3) == False
     grid_4 = '....V...........', '....#...........'
     assert look_ahead_is_empty(grid_4) == False
+
+    grid = '<...........', '................'
+    assert look_ahead_is_empty(grid) == False
+    grid_2 = '....>', '................'
+    assert look_ahead_is_empty(grid_2) == False
+    grid_3 = '.........^.......', '.................'
+    assert look_ahead_is_empty(grid_3) == False
+    grid_4 = '.................', '.......V........'
+    assert look_ahead_is_empty(grid_4) == False
+
+
+
+def test_rotate_avatar():
+    assert rotate_avatar(['...', '...', '.V.']) == ['...', '...', '.<.']
+    assert rotate_avatar(['...', '...', '.<.']) == ['...', '...', '.^.']
+    assert rotate_avatar(['...', '...', '.^.']) == ['...', '...', '.>.']
+    assert rotate_avatar(['...', '...', '.>.']) == ['...', '...', '.V.']
+
+
+
+
+def test_move_avatar():
+    assert move_avatar(['...', '...', '.^.']) == ['...', '.^.', '...']
+    assert move_avatar(['...', '...', '.<.']) == ['...', '...', '<..']
+    assert move_avatar(['..V', '...', '...']) == ['...', '..V', '...']
+    assert move_avatar(['...', '...', '.>.']) == ['...', '...', '..>']
+
+def test_step_forward():
+    assert step_forward(['..', '.V']) == ['..', '.<']
